@@ -3,5 +3,5 @@ from django.shortcuts import render
 
 # Create your views here.
 
-def hellow_world(request):
-    return render(request, 'base.html')
+def hello_world(request):
+    return render(request, 'accountapp/hello_world.html')
