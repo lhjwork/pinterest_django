@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div style="text-align: center">
+<!--   aoccoutapp:create :: 어떤앱에서:어떤 라우팅으로 가라 -->
+    <form action="{% url 'accountapp:create' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" class="btn btn-primary">
+    </form>
+</div>
+
+{% endblock %}
