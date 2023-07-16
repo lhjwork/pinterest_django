@@ -11,7 +11,7 @@
     </div>
 
 <!--   aoccoutapp:create :: 어떤앱에서:어떤 라우팅으로 가라 -->
-    <form action="{% url 'accountapp:delete'  pk=user.pk %}" method="post">
+    <form action="{% url 'accountapp:delete'  pk=target_user.pk %}" method="post">
         {% csrf_token %}
         <input type="submit" class="btn btn-danger rounded-pill col-6 mt-3 ">
     </form>
