@@ -37,3 +37,5 @@ class AccountCreateView(CreateView):
     # reverse와 reverse_lazy의 차이는 큰차이는 없으나 reverse의 경우 클래스에서 불러 올 수 없음 정도만 알자.
     success_url = reverse_lazy('accountapp:hello_world')
     template_name = 'accountapp/create.html'
+
+
