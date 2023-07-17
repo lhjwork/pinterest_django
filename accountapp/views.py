@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm, BaseUserCreationForm
 from django.contrib.auth.models import User
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
@@ -12,24 +12,26 @@ from accountapp.models import HelloWorld
 # Create your views here.
 
 def hello_world(request):
-    if request.method == "POST":
 
-        temp = request.POST.get('hello_world_input')
+ if request.user.is_authenticated:
+        if request.method == "POST":
 
-        new_hello_world = HelloWorld()
-        new_hello_world.text = temp
-        new_hello_world.save()
+            temp = request.POST.get('hello_world_input')
 
-        hello_world_list = HelloWorld.objects.all()
+            new_hello_world = HelloWorld()
+            new_hello_world.text = temp
+            new_hello_world.save()
 
-        # account app 내부에 있는 hello_world로 제 접속하라 -> def hello_world를 말하는 거 같음
-        return HttpResponseRedirect(reverse('accountapp:hello_world'))
+            hello_world_list = HelloWorld.objects.all()
 
-    else:
+            # account app 내부에 있는 hello_world로 제 접속하라 -> def hello_world를 말하는 거 같음
+            return HttpResponseRedirect(reverse('accountapp:hello_world'))
+        else:
 
-        hello_world_list = HelloWorld.objects.all()
-        return render(request, 'accountapp/hello_world.html', context={'hello_world_list' : hello_world_list })
-
+            hello_world_list = HelloWorld.objects.all()
+            return render(request, 'accountapp/hello_world.html', context={'hello_world_list' : hello_world_list })
+ else:
+        return HttpResponseRedirect(reverse('accountapp:login'))
 
 class AccountCreateView(CreateView):
     model = User
@@ -52,10 +54,39 @@ class AccountUpdateView(UpdateView):
         success_url = reverse_lazy('accountapp:hello_world')
         template_name = 'accountapp/update.html'
 
+        # self는 여기 클래스 자체(AccountDeleteView)를 가리킨다.
+        def get(self, *args, **kwargs):
+            # get_object는 User object 중에서도 update View의 경우에는 pk= target_user.pk를 받고 있다.
+            if self.request.user.is_authenticated and self.get_object() == self.request.user:
+                return super().get(*args, **kwargs)
+            else:
+                return HttpResponseForbidden()
+
+        def post(self, *args, **kwargs):
+            if self.request.user.is_authenticated and self.get_object() == self.request.user:
+                return super().get(*args, **kwargs)
+            else:
+                return HttpResponseForbidden()
+
 class AccountDeleteView(DeleteView):
     model = User
     context_object_name = 'target_user'
     success_url = reverse_lazy('accountapp:login')
     template_name = 'accountapp/delete.html'
+
+
+    def get(self, *args, **kwargs):
+        #get_object는 User object 중에서도 update View의 경우에는 pk= target_user.pk를 받고 있다.
+        if self.request.user.is_authenticated and self.get_object() == self.request.user:
+            return super().get(*args, **kwargs)
+        else:
+            return HttpResponseForbidden()
+
+    def post(self, *args, **kwargs):
+        if self.request.user.is_authenticated and self.get_object() == self.request.user:
+            return super().get(*args, **kwargs)
+        else:
+            return HttpResponseForbidden()
+
 
 
