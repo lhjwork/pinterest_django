@@ -293,4 +293,14 @@ let magicGrid = new MagicGrid({
     useMin : true,
 })
 
+var masonrys = document.getElementsByTagName('img');
+
+//masonrys : 벽돌 형식
+// 이미지 하나하나 마다 이미지가 load 되면, magicGrid를 다시 positioning 하라!
+for(let i = 0; i < masonrys.length; i++){
+    masonrys[i].addEventListener('load', function(){
+    magicGrid.positionItems();
+    }, false);
+}
+
 magicGrid.listen();
