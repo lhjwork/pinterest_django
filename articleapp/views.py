@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 
 from articleapp.forms import ArticleCreationForm
 from articleapp.models import Article
@@ -9,7 +9,7 @@ from articleapp.models import Article
 # Create your views here.
 class ArticleCreateView(CreateView):
     model = Article
-    from_class = ArticleCreationForm
+    form_class = ArticleCreationForm
     template_name = 'articleapp/create.html'
 
     def form_valid(self, form):
@@ -19,4 +19,9 @@ class ArticleCreateView(CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('articleapp:detail', kwargs={'pk' : self.object.pk})
+        return reverse('articleapp:detail', kwargs={'pk': self.object.pk})
+
+class ArticleDetailView(DetailView):
+        model = Article
+        context_object_name = 'target_article'
+        template_name = 'articleapp/detail.html'
