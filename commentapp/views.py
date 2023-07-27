@@ -23,4 +23,4 @@ class CommentCreateView(CreateView):
         temp_comment.save()
         return super().form_valid(form)
     def get_success_url(self):
-        return reverse('articleapp:detail', kwargs={'pk': self.object.arricle.pk})
+        return reverse('articleapp:detail', kwargs={'pk': self.object.article.pk})
