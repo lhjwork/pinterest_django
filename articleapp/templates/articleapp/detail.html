@@ -4,13 +4,17 @@
 {% block content %}
 
     <div>
-        <div style="text-align:center; max-width:500px; margin:4rem auto; gidisplay:flex; flex-direction: column;">
+        <div style="text-align:center; max-width:700px; margin:4rem auto; display:flex; flex-direction: column;">
 
             <h1>
                 {{ target_article.title }}
             </h1>
+            <h5>
+                {{ target_article.writer.profile.nickname }}
+            </h5>
+            <hr>
 
-                 <img src="{{ target_article.image.url }}" alt="" style="text-align:center">
+            <img src="{{ target_article.image.url }}" alt="" style="width:100%; border-radius: 1rem; margin:2rem 0;">
 
 
 
@@ -18,13 +22,19 @@
                 {{ target_article.content }}
             </p>
 
-            <a href="{% url 'articleapp:update' pk=target_article.pk %}">
-                <P>Update Article</P>
+
+            {% if target_article.writer == user %}
+            <a href="{% url 'articleapp:update' pk=target_article.pk %}" class="btn btn-primary rounded-pill col">
+                Update
             </a>
 
-            <a href="{% url 'articleapp:delete' pk=target_article.pk %}">
-                <P>Delete Article</P>
+            <a href="{% url 'articleapp:delete' pk=target_article.pk %}" class="btn btn-danger rounded-pill col">
+                Delete
             </a>
+            {% endif %}
+            <hr>
+
+            커멘트가 들어갈 공간
 
         </div>
     </div>
