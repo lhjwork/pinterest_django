@@ -25,6 +25,7 @@ urlpatterns = [
     path('profiles/', include('profileapp.urls')),
     path('articles/', include('articleapp.urls')),
     path('comments/', include('commentapp.urls')),
+    path('projects/', include('projectapp.urls')),
 
 #   static 이 구문으로 설정을 해야 서버가 image url을 정상적으로 뱉어낸다.
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
