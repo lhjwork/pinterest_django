@@ -3,30 +3,38 @@
 
 {% block content %}
 
+
 <style>
    .container {
         padding: 0;
-        margin: 0 auto;
-   }
-
-   .container a {
-        width:41%;
-        max-width:250px;
+        margin : 0 auto;
+        display:flex;
+        justify-content:center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width:500px;
    }
 
     .container div {
         display:flex;
         justify-content:center;
-        align-items:center;3
-
+        align-items:center;
         border-radius : 1rem;
     }
     .container img {
-        width: 100%;
+        width: 7rem;
+        height: 7rem;
+        object-fit:cover;
         border-radius : 1rem;
     }
 
 
+  @media screen and (max-width: 400px) {
+        .container {
+            width:250px;
+        }
+
+    }
 </style>
 
 
@@ -34,13 +42,13 @@
 
     <div class="container">
         {% for project in project_list %}
-            <a href="{% url 'projectapp:detail' pk=project.pk %}">
+            <a href="{% url 'projectapp:detail' pk=project.pk %}" style="margin:4px;">
                 {% include 'snippets/card_project.html' with project=project %}
             </a>
         {% endfor %}
     </div>
 
-        <script src="{% static 'js/magicgrid.js'%}"></script>
+<!--        <script src="{% static 'js/magicgrid.js'%}"></script>-->
 
     {% else %}
         <div class="text-center">
