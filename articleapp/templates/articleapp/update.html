@@ -3,6 +3,9 @@
 
 
 {% block content %}
+<script src="//cdn.jsdelivr.net/npm/medium-editor@5.23.2/dist/js/medium-editor.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@5.23.2/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+
 
 <div style="text-align:center; max-width:500px; margin:4rem auto;">
 
@@ -11,7 +14,7 @@
     </div>
 
 <!--   aoccoutapp:create :: 어떤앱에서:어떤 라우팅으로 가라 -->
-    <form action="{% url 'articleapp:update' pk=target_article  %}" method="post" enctype="multipart/form-data">
+    <form action="{% url 'articleapp:update' pk=target_article.pk  %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 <!--        {{ form }}-->
         {% bootstrap_form form %}
@@ -19,4 +22,5 @@
     </form>
 </div>
 
+<script>var editor = new MediumEditor('.editable');</script>
 {% endblock %}
