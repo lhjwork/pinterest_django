@@ -18,6 +18,7 @@
                 {{ target_user.username }}
                 {% if target_user == user %}
                 <a class="material-icons"
+                   style="box-shadow: 0 0 4px #ccc; border-radius: 10rem; padding: 0.4rem"
                    href="{% url 'profileapp:update' pk=target_user.profile.pk  %}">
                     edit
                 </a>
@@ -43,14 +44,18 @@
             {% endif %}
 
             {% if target_user == user %}
-            <a href="{% url 'accountapp:update' pk=user.pk %}">
-                <p>
-                    Charge Info
+            <a class="material-icons"
+               style="box-shadow: 0 0 4px #ccc; border-radius: 10rem; padding: 0.4rem; margin-bottom:20px"
+               href="{% url 'accountapp:update' pk=user.pk %}">
+                <p style=" margin-bottom : 0rem;">
+                   settings
                 </p>
             </a>
-             <a href="{% url 'accountapp:delete' pk=user.pk %}">
-                <p>
-                    Quit
+             <a class="material-icons"
+                style="box-shadow: 0 0 4px #fcc; border-radius: 10rem; padding: 0.4rem; margin-bottom:20px "
+                href="{% url 'accountapp:delete' pk=user.pk %}">
+                <p style="margin-bottom : 0rem;">
+                    cancel
                 </p>
             </a>
             {% endif %}
