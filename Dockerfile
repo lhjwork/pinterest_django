@@ -1,0 +1,17 @@
+FROM python:3.10.11
+
+WORKDIR /home/
+
+RUN git clone https://github.com/lhjwork/pinterest_django.git
+
+WORKDIR /home/pinterest_django/
+
+RUN pip install -r requirements.txt
+
+RUN echo "SECRET_KEY=django-insecure-fwei5h(cgr6%5i4ipaiv%g7_mzes%u1ge9)3*di^mm%-e^!1+*" > .env
+
+RUN python manage.py migrate
+
+EXPOSE 8000
+
+CMD ["python","manage.py", "runserver", "0.0.0.0:8000"]
