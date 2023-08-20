@@ -4,7 +4,7 @@ WORKDIR /home/
 
 RUN git clone https://github.com/lhjwork/pinterest_django.git
 
-WORKDIR /home/pragmatic/
+WORKDIR /home/pinterest_django/
 
 RUN pip install -r requirements.txt
 
@@ -16,4 +16,4 @@ RUN python3 manage.py migrate
 
 EXPOSE 8000
 
-CMD ["gunicorn","pragmatic.wsgi", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn","pinterest_django.wsgi", "--bind", "0.0.0.0:8000"]
