@@ -17,3 +17,5 @@ RUN python3 manage.py migrate
 EXPOSE 8000
 
 CMD ["gunicorn","pragmatic.wsgi", "--bind", "0.0.0.0:8000"]
+
+#http://158.247.240.178:8080/
