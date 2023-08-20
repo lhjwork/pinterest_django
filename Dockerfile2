@@ -2,10 +2,9 @@ FROM python:3.9.0
 
 WORKDIR /home/
 
-WORKDIR /home/pinterest_django/
+WORKDIR /home/pragmatic/
 
 RUN git clone https://github.com/lhjwork/pinterest_django.git
-
 
 RUN pip install -r requirements.txt
 
