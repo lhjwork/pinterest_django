@@ -12,7 +12,9 @@ RUN pip install gunicorn
 
 RUN echo "SECRET_KEY=django-insecure-fwei5h(cgr6%5i4ipaiv%g7_mzes%u1ge9)3*di^mm%-e^!1+*" > .env
 
-RUN python3 manage.py migrate
+RUN python manage.py migrate
+
+RUN python manage.py collectstatic
 
 EXPOSE 8000
 
