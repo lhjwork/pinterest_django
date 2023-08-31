@@ -23,7 +23,7 @@ class AccountCreateView(CreateView):
     # 강의 에서는 UserCreationForm 사용
     form_class = BaseUserCreationForm
     # reverse와 reverse_lazy의 차이는 큰차이는 없으나 reverse의 경우 클래스에서 불러 올 수 없음 정도만 알자.
-    success_url = reverse_lazy('accountapp:hello_world')
+    success_url = reverse_lazy('accountapp:login')
     template_name = 'accountapp/create.html'
 
 
@@ -44,7 +44,7 @@ class AccountUpdateView(UpdateView):
         model = User
         context_object_name = 'target_user'
         form_class = AccountUpdateForm
-        success_url = reverse_lazy('accountapp:hello_world')
+        success_url = reverse_lazy('accountapp:login')
         template_name = 'accountapp/update.html'
 
         # self는 여기 클래스 자체(AccountDeleteView)를 가리킨다.
